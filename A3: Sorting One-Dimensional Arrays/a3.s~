@@ -1,0 +1,200 @@
+/**
+*	Name: Muzhou, Zhai
+*	ID: 10106810
+*	Course: CPSC 355
+*	Tutorial Section: T01
+*	Assignment: 3
+**/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v_s = -160
+
+
+
+dataString:
+		.asciz		"v[%d] = %d\n"
+												!data string format
+beforeString:
+		.asciz		"\nBefore sorting:\n---------------------\n"
+ 												!before title string format
+afterString:
+		.asciz		"\nAfter sorting:\n---------------------\n"
+												!after title string format
+		.align 		4
+		.global 	main 		
+main: 
+		save 		%sp, -256, %sp
+
+		set 		0, %l1 					!clear i
+		ba,a		test1 						!branch always to test1
+		cmp 		%l1, 40 				!delay slot
+
+loop1:
+		call 		rand 						!call random function
+		mov 		0, %o1						!delay slot
+		and 		%o0, 0xFF, %o1				!and result with 0xFF
+
+		sll			%l1, 2, %o0				!i * 4
+		add 		%fp, %o0, %o0				!add to frame pointer
+		st 			%o1, [%o0 + v_s]			!store o1 to v[i]
+
+		inc			%l1 						!increment i
+
+test1:
+		cmp 		%l1, 40 				!compare i with size
+		bl,a		loop1 						!branch to loop1 if less than
+		mov 		0, %o1						!delay slot
+
+printBeforeHeader:
+		set 		beforeString, %o0			!set beforeString to o0
+		call		printf 						!calling printf function
+		mov 		0, %o1						!delay slot
+
+		set 		0,	%l1 					!clear i
+		ba,a		test2 						!branch always to test2
+		cmp 		%l1, 40				!delay slot
+
+printBefore:
+		sll			%l1, 2, %o0 				!i * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld 			[%o0 + v_s], %o2			!load v[i] to o2
+
+		set			dataString, %o0 			!set dataString to o0
+		call		printf 						!calling printf function
+		mov 		%l1, %o1 					!move i to o1
+		
+		inc 		%l1 						!increment i
+
+test2:
+		cmp 		%l1, 40 				!compare i with size
+		bl,a		printBefore 				!branch to printBefore if less than
+		sll			%l1, 2, %o0				!delay slot
+
+sortInit1:
+		set			40, %o0					!set size to o0
+		call 		.div 						!calling .div function
+		mov 		2, %o1 						!move 2 to o1
+		mov 		%o0, %l0 				!move result to gap
+
+		ba,a 		sortTest1 					!branch always to sortTest1
+		cmp 		%l0, 0 					!delay slot
+
+sortLoop1:
+		mov 		%l0, %l1 				!i = gap
+
+		ba,a		sortTest2 					!branch always to sortTest2
+		cmp 		%l1, 40				!delay slot
+
+sortLoop2:
+		sub 		%l1, %l0, %l2			!j = i - gap
+
+		ba,a		sortTest3 					!branch always to sortTest3
+		cmp 		%l2, 0 					!delay slot
+
+sortLoop3:
+		sll			%l2, 2, %o0 				!j * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld 			[%o0 + v_s], %o0 			!load v[j] to o0
+		mov 		%o0, %l3 				!temp = v[j]
+
+		add 		%l2, %l0, %o0			!j + gap
+		sll			%o0, 2, %o0					!(j + gap) * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld			[%o0 + v_s], %o0 			!load v[j + gap] to o0
+
+		sll			%l2, 2, %o1				!j * 4
+		add			%fp, %o1, %o1				!add to frame pointer
+		st 			%o0 , [%o1 + v_s]			!store v[j + gap] to v[j]
+
+		add 		%l2, %l0, %o0 			!j + gap
+		sll			%o0, 2, %o0					!(j + gap) * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		st 			%l3, [%o0 + v_s] 		!store temp into [j + gap]
+
+sortLoop3Cont:
+		sub 		%l2, %l0, %l2 			!j = j - gap
+
+sortTest3:
+		cmp 		%l2, 0 					!compare j with 0
+		bl,a		sortLoop2Cont 				!branch to sortLoop2Cont if less than
+		mov 		0, %o0						!delay slot
+
+		add 		%l2, %l0, %o0 			!j + gap
+		sll			%o0, 2, %o0 				!(j + gap) * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld 			[%o0 + v_s], %o1 			!load v[j + gap] to o1
+		
+		sll			%l2, 2, %o0 				!j * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld 			[%o0 + v_s], %o2 			!load v[j] to o2
+
+		cmp			%o2, %o1 					!compare o2 with o1
+		ble,a		sortLoop2Cont 				!branch to sortLoop2Cont if less or equal to
+		mov 		0, %o1						!delay slot
+
+		ba,a		sortLoop3 					!branch always to sortLoop3
+		sll			%l2, 2, %o0				!delay slot
+
+sortLoop2Cont:
+		inc 		%l1 						!increment i
+
+sortTest2:
+		cmp 		%l1, 40 				!compare i with size
+		bl,a		sortLoop2 					!branch to sortLoop2 if less than
+		sub 		%l1, %l0, %l2			!delay slot	
+
+sortLoop1Cont:
+		mov 		%l0, %o0 				!move gap to o0
+		call 		.div 						!calling .div function
+		mov 		2, %o1 						!move 2 to o1
+		mov 		%o0, %l0 				!move result to gap
+
+sortTest1:
+		cmp 		%l0, 0 					!compare gap with 0
+		bg,a 		sortLoop1 					!branch to sortLoop1 if greater than
+		mov 		%l0, %l1				!delay slot
+
+allLoopDone:
+		set 		0, %l1 					!clear i
+
+printAfterHeader:
+		set 		afterString, %o0 			!set afterString to o0
+		call 		printf 						!calling printf function
+		mov 		0, %o1						!delay slot
+
+printAfter:
+		sll			%l1, 2, %o0 				!i * 4
+		add 		%fp, %o0, %o0 				!add to frame pointer
+		ld 			[%o0 + v_s], %o2 			!load v[i] to o2
+
+		set			dataString, %o0 			!set dataString to o0
+		call		printf 						!calling printf function
+		mov 		%l1, %o1 					!move i to o1
+		
+		inc 		%l1 						!increment i
+
+test3:
+		cmp 		%l1, 40 				!compare i with size
+		bl,a		printAfter 					!branch to printAfter if less than
+		sll			%l1, 2, %o0				!delay slot
+
+done:
+		mov			1, %g1						!exit request
+		ta 			0 							!trap to system
+
+		

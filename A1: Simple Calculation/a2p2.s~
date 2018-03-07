@@ -1,0 +1,248 @@
+/**
+ * Identifying information
+ * Name: 
+ * Course: CPSC 355
+ * Tutorial section: 
+ * Due date:
+ * Assignment 2 Part 2
+ */
+/**
+ * let l0 = i
+ * let l1 = multiplicand
+ * let l2 = multiplier
+ * let l3 = product
+ * let l4 = negative
+ */
+/**
+ * Inputs 1
+ * Multiplicand = 82732983 (0x04ee67b7)
+ * Multiplier = 120490892 (0x072e8b8c)
+ * Result (product and multiplier) = 9968570919490836 (0x00236a5c and 0xc8931514)
+ *
+ * Input 2
+ * Multiplicand = 82732983 (0x04ee67b7)
+ * Multiplier = -120490892 (0xf8d17474)
+ * Result (product and multiplier) = -9968570919490836 (0xffdc95a3 and 0x376ceaec)
+ *
+ * Input 3
+ * Multiplicand = -82732983 (0xfb119849)
+ * Multiplier = -120490892 (0xf8d17474)
+ * Result (product and multiplier) = 9968570919490836 (0x00236a5c and 0xc8931514)
+ */
+setnum:
+		.asciz 		"Set %d:\n"
+databefore:
+		.asciz 		"\tMultiplicand before = \t0x%8.8x\n\tProduct before = \t0x%8.8x\n\tMultiplier before = \t0x%8.8x\n\n"
+dataafter:
+		.asciz 		"\tMultiplicand after = \t0x%8.8x\n\tProduct after = \t0x%8.8x\n\tMultiplier after = \t0x%8.8x\n\n"
+
+		.align		4			
+		.global 	main
+main:	
+		save 		%sp, -96, %sp
+		set 		0, %l0				!set i		
+		set 		82732983, %l1		!set multiplicand	
+		set     	120490892, %l2		!set multiplier
+		set 		0, %l3				!set product
+		set 		0, %l4				!set negative
+		
+		cmp 		%l2, 0				!compare multiplier (l2) with 0
+		bge 		loop 				!branch to loop if greater or equal
+		cmp 		%l0, 32				!delay slot
+		mov 		1, %l4				!set negative (l4) to 1 if multiplier is less than
+	
+		
+loop:
+		cmp 		%l0, 32				!compare i (l0) with 32
+		bge,a		ifnegative			!branch to ifnegative if greater or equal than
+		cmp 		%l4, 1				!delay slot
+		
+		btst		1, %l2				!check whether the LSB of multiplier is 1			
+		ble,a 		shiftmultiplier 	!branch to shiftmultiplier if less or equal
+		srl 		%l2, 1, %l2			!delay slot		
+		add			%l1, %l3, %l3		!product (l3) = multiplicand (l1) + product (l3)
+				
+		srl 		%l2, 1, %l2			!shift multiplier (l2) right logically by 1
+		
+shiftmultiplier:	
+		and			1, %l3, %o0			!check whether the LSB of product (l3) is 1
+		cmp			%o0, 0				!compare the LSB of product with 0
+		ble,a 		shiftproduct		!branch to shiftproduct if less or equal
+		sra 		%l3, 1, %l3			!delay slot	
+		
+		set			0x80000000, %o0		!set 1 as the MSB of the bitmask
+		add			%o0, %l2, %l2		!add 1 to the MSB of the multiplier (l2)
+		sra 		%l3, 1, %l3			!shift product(l3) right arithematically by 1	
+
+	
+shiftproduct:			
+		inc 		%l0					!increment i (l0)
+		ba,a  		loop 				!branch always to loop
+		cmp 		%l0, 32				!delay slot
+		
+			
+ifnegative:	
+		cmp 		%l4, 1				!compare 1 with negative (l4)		
+		bne,a 		printdata			!branch to printdata if not equal
+		set 		setnum, %o0			!delay slot
+		sub 		%l3, %l1, %l3 		!product = product - multiplicand
+		
+printdata:
+		set 		setnum, %o0			!set setnum in o0
+		call 		printf				!calling printf
+		mov 		1, %o1				!move 1 in o1
+
+	
+		set 		databefore, %o0		!set databefore in o0
+		set 		82732983, %o1		!set multiplicand to o1
+		mov 		0, %o2				!move product to o2		
+		set 		120490892, %o3		!set multiplier to o3	
+		call 		printf				!calling printf
+		nop
+		
+		set 		dataafter, %o0		!set dataafter in o0
+		mov 		%l1, %o1			!mov multiplicand to o1
+		mov 		%l3, %o2			!mov product to o2
+		call 		printf				!calling printf
+		mov 		%l2, %o3			!mov multiplier to o3
+		
+		
+main2:
+		set 		0, %l0				!set i		
+		set 		82732983, %l1		!set multiplicand	
+		set     	-120490892, %l2		!set multiplier
+		set 		0, %l3				!set product
+		set 		0, %l4				!set negative
+		
+		cmp 		%l2, 0				!compare multiplier (l2) with 0
+		bge 		loop2 				!branch to loop2 if greater or equal
+		cmp 		%l0, 32				!delay slot
+		mov 		1, %l4				!set negative (l4) to 1 if multiplier is less than
+	
+		
+loop2:
+		cmp 		%l0, 32				!compare i (l0) with 32
+		bge,a		ifnegative2			!branch to ifnegative2 if greater or equal than
+		cmp 		%l4, 1				!delay slot
+		
+		btst		1, %l2				!check whether the LSB of multiplier is 1			
+		ble,a 		shiftmultiplier2 	!branch to shiftmultiplier2 if less or equal
+		srl 		%l2, 1, %l2			!delay slot		
+		add			%l1, %l3, %l3		!product (l3) = multiplicand (l1) + product (l3)
+				
+		srl 		%l2, 1, %l2			!shift multiplier (l2) right logically by 1
+		
+shiftmultiplier2:	
+		and			1, %l3, %o0			!check whether the LSB of product (l3) is 1
+		cmp			%o0, 0				!compare the LSB of product with 0
+		ble,a 		shiftproduct2		!branch to shiftproduct2 if less or equal
+		sra 		%l3, 1, %l3			!delay slot	
+		
+		set			0x80000000, %o0		!set 1 as the MSB of the bitmask
+		add			%o0, %l2, %l2		!add 1 to the MSB of the multiplier (l2)
+		sra 		%l3, 1, %l3			!shift product(l3) right arithematically by 1	
+
+	
+shiftproduct2:			
+		inc 		%l0					!increment i (l0)
+		ba,a  		loop2 				!branch always to loop2
+		cmp 		%l0, 32				!delay slot
+		
+			
+ifnegative2:	
+		cmp 		%l4, 1				!compare 1 with negative (l4)		
+		bne,a 		printdata2			!branch to printdata2 if not equal
+		set 		setnum, %o0			!delay slot
+		sub 		%l3, %l1, %l3 		!product = product - multiplicand
+		
+printdata2:
+		set 		setnum, %o0			!set setnum in o0
+		call 		printf				!calling printf
+		mov 		2, %o1				!move 1 in o1
+
+	
+		set 		databefore, %o0		!set databefore in o0
+		set 		82732983, %o1		!set multiplicand to o1
+		mov 		0, %o2				!move product to o2		
+		set 		-120490892, %o3		!set multiplier to o3	
+		call 		printf				!calling printf
+		nop
+		
+		set 		dataafter, %o0		!set dataafter in o0
+		mov 		%l1, %o1			!mov multiplicand to o1
+		mov 		%l3, %o2			!mov product to o2
+		call 		printf				!calling printf
+		mov 		%l2, %o3			!mov multiplier to o3
+		
+
+
+main3:
+		set 		0, %l0				!set i		
+		set 		-82732983, %l1		!set multiplicand	
+		set     	-120490892, %l2		!set multiplier
+		set 		0, %l3				!set product
+		set 		0, %l4				!set negative
+		
+		cmp 		%l2, 0				!compare multiplier (l2) with 0
+		bge 		loop3 				!branch to loop3 if greater or equal
+		cmp 		%l0, 32				!delay slot
+		mov 		1, %l4				!set negative (l4) to 1 if multiplier is less than
+	
+		
+loop3:
+		cmp 		%l0, 32				!compare i (l0) with 32
+		bge,a		ifnegative3			!branch to ifnegative3 if greater or equal than
+		cmp 		%l4, 1				!delay slot
+		
+		btst		1, %l2				!check whether the LSB of multiplier is 1			
+		ble,a 		shiftmultiplier3 	!branch to shiftmultiplier3 if less or equal
+		srl 		%l2, 1, %l2			!delay slot		
+		add			%l1, %l3, %l3		!product (l3) = multiplicand (l1) + product (l3)
+				
+		srl 		%l2, 1, %l2			!shift multiplier (l2) right logically by 1
+		
+shiftmultiplier3:	
+		and			1, %l3, %o0			!check whether the LSB of product (l3) is 1
+		cmp			%o0, 0				!compare the LSB of product with 0
+		ble,a 		shiftproduct3		!branch to shiftproduct3 if less or equal
+		sra 		%l3, 1, %l3			!delay slot	
+		
+		set			0x80000000, %o0		!set 1 as the MSB of the bitmask
+		add			%o0, %l2, %l2		!add 1 to the MSB of the multiplier (l2)
+		sra 		%l3, 1, %l3			!shift product(l3) right arithematically by 1	
+
+	
+shiftproduct3:			
+		inc 		%l0					!increment i (l0)
+		ba,a  		loop3 				!branch always to loop3
+		cmp 		%l0, 32				!delay slot
+		
+			
+ifnegative3:	
+		cmp 		%l4, 1				!compare 1 with negative (l4)		
+		bne,a 		printdata3			!branch to printdata3 if not equal
+		set 		setnum, %o0			!delay slot
+		sub 		%l3, %l1, %l3 		!product = product - multiplicand
+		
+printdata3:
+		set 		setnum, %o0			!set setnum in o0
+		call 		printf				!calling printf
+		mov 		3, %o1				!move 1 in o1
+
+	
+		set 		databefore, %o0		!set databefore in o0
+		set 		-82732983, %o1		!set multiplicand to o1
+		mov 		0, %o2				!move product to o2		
+		set 		-120490892, %o3		!set multiplier to o3	
+		call 		printf				!calling printf
+		nop
+		
+		set 		dataafter, %o0		!set dataafter in o0
+		mov 		%l1, %o1			!mov multiplicand to o1
+		mov 		%l3, %o2			!mov product to o2
+		call 		printf				!calling printf
+		mov 		%l2, %o3			!mov multiplier to o3
+		
+done:
+		mov 		1, %g1				!exit request
+		ta			0					!trap to system

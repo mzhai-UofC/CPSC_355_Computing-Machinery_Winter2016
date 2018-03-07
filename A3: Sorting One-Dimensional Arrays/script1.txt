@@ -1,0 +1,151 @@
+Script started on Thu Feb 11 17:25:19 2016
+sh-3.00$ /usr/local/bui  in/gdb a2p1
+[?1034hGNU gdb 6.8
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "sparc-sun-solaris2.10"...
+(no debugging symbols found)
+(gdb) r
+Starting program: /home/uga/mzhai/a2p1 
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+-----------------------
+Bit Field = 49d723
+Right Most Bit = 11
+Number of Bits = 9
+
+Extracted = 13a
+
+-----------------------
+Bit Field = 1ba621b0
+Right Most Bit = 4
+Number of Bits = 4
+
+Extracted = b
+
+-----------------------
+Bit Field = deadbeef
+Right Most Bit = 8
+Number of Bits = 22
+
+Extracted = 1eadbe
+
+
+Program exited normally.
+(gdb) b set1
+Breakpoint 1 at 0x106dc
+(gdb) b printBefore
+Breakpoint 2 at 0x106ec
+(gdb) b extraction
+Breakpoint 3 at 0x10704
+(gdb) b set2
+Breakpoint 4 at 0x10754
+(gdb) display/    /i   /  i/$pc
+No symbol table is loaded.  Use the "file" command.
+(gdb) r
+Starting program: /home/uga/mzhai/a2p1 
+[New LWP    1        ]
+(no debugging symbols found)
+(no debugging symbols found)
+
+Breakpoint 1, 0x000106dc in set1 ()
+(gdb) rdisplay i/$pc
+No symbol table is loaded.  Use the "file" command.
+(gdb) display/i $pc
+1: x/i $pc
+0x106dc <set1>: sethi  %hi(0x49d400), %l0
+(gdb) p $l0
+$1 = 0
+(gdb) p $l1
+$2 = 0
+(gdb) p $l2
+$3 = 0
+(gdb) m ni
+0x000106e0 in set1 ()
+1: x/i $pc
+0x106e0 <set1+4>:       or  %l0, 0x323, %l0     ! 0x49d723
+(gdb) 
+0x000106e4 in set1 ()
+1: x/i $pc
+0x106e4 <set1+8>:       mov  0xb, %l1
+(gdb) 
+0x000106e8 in set1 ()
+1: x/i $pc
+0x106e8 <set1+12>:      mov  9, %l2
+(gdb) 
+
+Breakpoint 2, 0x000106ec in printBefore ()
+1: x/i $pc
+0x106ec <printBefore>:  sethi  %hi(0x10400), %o0
+(gdb) 
+0x000106f0 in printBefore ()
+1: x/i $pc
+0x106f0 <printBefore+4>:        or  %o0, 0x270, %o0     ! 0x10670 <beforeData>
+(gdb) c
+Continuing.
+(no debugging symbols found)
+-----------------------
+Bit Field = 49d723
+Right Most Bit = 11
+Number of Bits = 9
+
+
+Breakpoint 3, 0x00010704 in extraction ()
+1: x/i $pc
+0x10704 <extraction>:   mov  0x20, %o0
+(gdb) cnip $l210
+$4 = 4839203
+(gdb) p $l0c[Knip $l21
+$5 = 11
+(gdb) p $l10c[Knip $l2
+$6 = 9
+(gdb) p $l210c[K ni
+0x00010708 in extraction ()
+1: x/i $pc
+0x10708 <extraction+4>: sub  %o0, %l1, %o0
+(gdb) 
+0x0001070c in extraction ()
+1: x/i $pc
+0x1070c <extraction+8>: sub  %o0, %l2, %o0
+(gdb) 
+0x00010710 in extraction ()
+1: x/i $pc
+0x10710 <extraction+12>:        sll  %l0, %o0, %l3
+(gdb) 
+0x00010714 in extraction ()
+1: x/i $pc
+0x10714 <extraction+16>:        add  %l1, %o0, %o0
+(gdb) 
+0x00010718 in extraction ()
+1: x/i $pc
+0x10718 <extraction+20>:        srl  %l3, %o0, %l3
+(gdb) 
+0x0001071c in printAfter ()
+1: x/i $pc
+0x1071c <printAfter>:   sethi  %hi(0x10400), %o0
+(gdb) c
+Continuing.
+Extracted = 13a
+
+
+Breakpoint 4, 0x00010754 in set2 ()
+1: x/i $pc
+0x10754 <set2>: sethi  %hi(0x1ba62000), %l0
+(gdb) cnip $l210
+$7 = 4839203
+(gdb) p $l0c[Knip $l21
+$8 = 11
+(gdb) p $l10c[Knip $l2
+$9 = 9
+(gdb) p $l3
+$10 = 314
+(gdb) quit
+The program is running.  Exit anyway? (y or n) y
+sh-3.00$ exit
+exit
+
+script done on Thu Feb 11 17:31:32 2016

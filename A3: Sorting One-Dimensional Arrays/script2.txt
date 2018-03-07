@@ -1,0 +1,860 @@
+Script started on Thu Feb 11 16:52:03 2016
+sh-3.00$ exit/usr/local/bin/gdb a2p2sh-3.00$ [5Pgcc a2p2.s -o a2p2
+sh-3.00$ gcc a2p2.s -o a2p2sh-3.00$ exit[K/usr/local/bin/gdb a2p2
+[?1034hGNU gdb 6.8
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "sparc-sun-solaris2.10"...
+(no debugging symbols found)
+(gdb) r
+Starting program: /home/uga/mzhai/a2p2 
+(no debugging symbols found)
+(no debugging symbols found)
+Set 1:
+(no debugging symbols found)
+        Multiplicand before =   0x04ee67b7
+        Product before =        0x00000000
+        Multiplier before =     0x072e8b8c
+
+        Multiplicand after =    0x04ee67b7
+        Product after =         0x00236a5c
+        Multiplier after =      0xc8931514
+
+Set 2:
+        Multiplicand before =   0x04ee67b7
+        Product before =        0x00000000
+        Multiplier before =     0xf8d17474
+
+        Multiplicand after =    0x04ee67b7
+        Product after =         0xffdc95a3
+        Multiplier after =      0x376ceaec
+
+Set 3:
+        Multiplicand before =   0xfb119849
+        Product before =        0x00000000
+        Multiplier before =     0xf8d17474
+
+        Multiplicand after =    0xfb119849
+        Product after =         0x00236a5c
+        Multiplier after =      0xc8931514
+
+
+Program exited with code 0140.
+(gdb) b main
+Breakpoint 1 at 0x10730
+(gdb) b loop
+Breakpoint 2 at 0x1075c
+(gdb) b shiftmultiplier
+Breakpoint 3 at 0x1077c
+(gdb) b shiftproduct
+Breakpoint 4 at 0x10798
+(gdb) b ifnegative
+Breakpoint 5 at 0x107a4
+(gdb) b printdata
+Breakpoint 6 at 0x107b8
+(gdb) b main2
+Breakpoint 7 at 0x10804
+(gdb) b loop2
+Breakpoint 8 at 0x10830
+(gdb) b shiftmultiplier2
+Breakpoint 9 at 0x10850
+(gdb) shiftproduct2
+Undefined command: "shiftproduct2".  Try "help".
+(gdb) b shift  product2
+Breakpoint 10 at 0x1086c
+(gdb) b printdata2
+Breakpoint 11 at 0x1088c
+(gdb) b mian3    ain3
+Breakpoint 12 at 0x108d8
+(gdb) b loop3
+Breakpoint 13 at 0x10904
+(gdb) b shiftmultiplier3
+Breakpoint 14 at 0x10924
+(gdb) b shiftproduct3
+Breakpoint 15 at 0x10940
+(gdb) b printdata3
+Breakpoint 16 at 0x10960
+(gdb) r
+Starting program: /home/uga/mzhai/a2p2 
+[New LWP    1        ]
+(no debugging symbols found)
+(no debugging symbols found)
+
+Breakpoint 1, 0x00010730 in main ()
+(gdb) display\ /i $pc
+1: x/i $pc
+0x10730 <main+4>:       sethi  %hi(0x4ee6400), %l0
+(gdb) p $l0
+$1 = 0
+(gdb) p $l1
+$2 = 0
+(gdb) p $l2
+$3 = 0
+(gdb) p $l3
+$4 = 0
+(gdb) p $l4
+$5 = -13030912
+(gdb) ni
+0x00010734 in main ()
+1: x/i $pc
+0x10734 <main+8>:       or  %l0, 0x3b7, %l0     ! 0x4ee67b7
+(gdb) p nip $l43210
+$6 = 82732032
+(gdb) p $l0[3Pnip $l0[Kp $l1
+$7 = 0
+(gdb) p $l2
+$8 = 0
+(gdb) p $l3
+$9 = 0
+(gdb) p $l4
+$10 = -13030912
+(gdb) ni
+0x00010738 in main ()
+1: x/i $pc
+0x10738 <main+12>:      sethi  %hi(0x72e8800), %l1
+(gdb) $ p $l0
+$11 = 82732983
+(gdb) p$  $l1
+$12 = 0
+(gdb) p $l2
+$13 = 0
+(gdb) p $l3
+$14 = 0
+(gdb) p $l4
+$15 = -13030912
+(gdb) c
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) cp $l43210
+$16 = 82732983
+(gdb) p $l0c[Kp $l4321
+$17 = 120490892
+(gdb) p $l10c[Kp $l432
+$18 = 0
+(gdb) p $l210c[Kp $l43
+$19 = 0
+(gdb) p $l3210c[Kp $l434
+$20 = 0
+(gdb) c
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) cp $l43210
+$21 = 82732983
+(gdb) p $l0c[Kp $l4321
+$22 = 60245446
+(gdb) p $l10c[Kp $l432
+$23 = 0
+(gdb) p $l210c[Kp $l43
+$24 = 0
+(gdb) p $l3210c[Kp $l4
+$25 = 0
+(gdb) c
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) cp $l43210
+$26 = 82732983
+(gdb) p $l0c[Kp $l4321
+$27 = 60245446
+(gdb) p $l10c[Kp $l432
+$28 = 0
+(gdb) p $l210c[Kp $l43
+$29 = 0
+(gdb) p $l3210c[Kp $l4
+$30 = 0
+(gdb) c
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) cp $l43210
+$31 = 82732983
+(gdb) p $l0c[Kp $l4321
+$32 = 60245446
+(gdb) p $l10c[Kp $l432
+$33 = 0
+(gdb) p $l210c[Kp $l43
+$34 = 0
+(gdb) p $l3210c[Kp $l4
+$35 = 1
+(gdb) c
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) c 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) c cp $l4323210
+$36 = 82732983
+(gdb) p $l0c[Kp $l432101
+$37 = 672029975
+(gdb) p $l10c[Kp $l432
+$38 = 7756217
+(gdb) p $l210c[Kp $l43
+$39 = 0
+(gdb) p $l3210c[Kp $l4
+$40 = 7
+(gdb) c
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) 
+Continuing.
+
+Breakpoint 3, 0x0001077c in shiftmultiplier ()
+1: x/i $pc
+0x1077c <shiftmultiplier>:      and  %l2, 1, %o0
+(gdb) 
+Continuing.
+
+Breakpoint 4, 0x00010798 in shiftproduct ()
+1: x/i $pc
+0x10798 <shiftproduct>: inc  %l4
+(gdb) 
+Continuing.
+
+Breakpoint 2, 0x0001075c in loop ()
+1: x/i $pc
+0x1075c <loop>: cmp  %l4, 0x20
+(gdb) cp $l43210
+$41 = 82732983
+(gdb) p $l0c[Kp $l4321
+$42 = -929884908
+(gdb) p $l10c[Kp $l432
+$43 = 2320988
+(gdb) p $l210c[Kp $l43
+$44 = 0
+(gdb) p $l3210c[Kp $l4
+$45 = 32
+(gdb) ni
+0x00010760 in loop ()
+1: x/i $pc
+0x10760 <loop+4>:       bge,a   0x107a4 <ifnegative>
+0x10764 <loop+8>:       cmp  %l3, 1
+(gdb) nip $l4321     n 
+0x00010764 in loop ()
+1: x/i $pc
+0x10764 <loop+8>:       cmp  %l3, 1
+(gdb) 
+
+Breakpoint 5, 0x000107a4 in ifnegative ()
+1: x/i $pc
+0x107a4 <ifnegative>:   cmp  %l3, 1
+(gdb) 
+0x000107a8 in ifnegative ()
+1: x/i $pc
+0x107a8 <ifnegative+4>: bne,a   0x107b8 <printdata>
+0x107ac <ifnegative+8>: sethi  %hi(0x10400), %o0
+(gdb) 
+0x000107ac in ifnegative ()
+1: x/i $pc
+0x107ac <ifnegative+8>: sethi  %hi(0x10400), %o0
+(gdb) 
+
+Breakpoint 6, 0x000107b8 in printdata ()
+1: x/i $pc
+0x107b8 <printdata>:    sethi  %hi(0x10400), %o0
+(gdb) 
+0x000107bc in printdata ()
+1: x/i $pc
+0x107bc <printdata+4>:  or  %o0, 0x270, %o0     ! 0x10670 <setnum>
+(gdb) 
+0x000107c0 in printdata ()
+1: x/i $pc
+0x107c0 <printdata+8>:  call  0x20ae8 <printf@plt>
+0x107c4 <printdata+12>: mov  1, %o1
+(gdb) 
+0x000107c4 in printdata ()
+1: x/i $pc
+0x107c4 <printdata+12>: mov  1, %o1
+(gdb) 
+Set 1:
+0x000107c8 in printdata ()
+1: x/i $pc
+0x107c8 <printdata+16>: sethi  %hi(0x10400), %o0
+(gdb) 
+0x000107cc in printdata ()
+1: x/i $pc
+0x107cc <printdata+20>: or  %o0, 0x279, %o0     ! 0x10679 <databefore>
+(gdb) 
+0x000107d0 in printdata ()
+1: x/i $pc
+0x107d0 <printdata+24>: sethi  %hi(0x4ee6400), %o1
+(gdb) 
+0x000107d4 in printdata ()
+1: x/i $pc
+0x107d4 <printdata+28>: or  %o1, 0x3b7, %o1     ! 0x4ee67b7
+(gdb) 
+0x000107d8 in printdata ()
+1: x/i $pc
+0x107d8 <printdata+32>: clr  %o2
+(gdb) 
+0x000107dc in printdata ()
+1: x/i $pc
+0x107dc <printdata+36>: sethi  %hi(0x72e8800), %o3
+(gdb) 
+0x000107e0 in printdata ()
+1: x/i $pc
+0x107e0 <printdata+40>: or  %o3, 0x38c, %o3     ! 0x72e8b8c
+(gdb) c
+Continuing.
+(no debugging symbols found)
+        Multiplicand before =   0x04ee67b7
+        Product before =        0x00000000
+        Multiplier before =     0x072e8b8c
+
+        Multiplicand after =    0x04ee67b7
+        Product after =         0x00236a5c
+        Multiplier after =      0xc8931514
+
+
+Breakpoint 7, 0x00010804 in main2 ()
+1: x/i $pc
+0x10804 <main2>:        clr  %l4
+(gdb) quit
+The program is running.  Exit anyway? (y or n) y
+sh-3.00$ exit
+exit
+
+script done on Thu Feb 11 17:15:39 2016

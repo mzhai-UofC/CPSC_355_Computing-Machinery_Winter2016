@@ -1,0 +1,27 @@
+Script started on Thu Mar 31 16:22:21 2016
+sh-3.00$ exit./a5a[21@gcc a5amain.o a5a.o -o a5ash-3.00$ as a5a.s[Kgcc -c a5amain.csh-3.00$ m4 a5a.m > a5a.s
+sh-3.00$ m4 a5a.m > a5a.ssh-3.00$ exit[K./a5a[21@gcc a5amain.o a5a.o -o a5ash-3.00$ as a5a.s[K
+sh-3.00$ as a5a.s[8@m4 a5a.m > a5a.ssh-3.00$ exit[K./a5a[21@gcc a5amain.o a5a.o -o a5ash-3.00$ as a5a.s[Kgcc -c a5amain.c
+sh-3.00$ gcc -c a5amain.csh-3.00$ [8Pas a5a.s[8@m4 a5a.m > a5a.ssh-3.00$ exit[K./a5a[21@gcc a5amain.o a5a.o -o a5a
+ld: warning: symbol `ch_m' has differing types:
+        (file a5amain.o type=OBJT; file a5a.o type=NOTY);
+        a5a.o definition taken
+sh-3.00$ ./a5a
+(a + b) * (c - d)
+ab+cd-*
+
+a + b * c - d
+
+abc*+d-
+
+(a + + b) * c - d
+
+ab+c*d-
+
+exit    (a + b) * c -d  d.
+
+ab+c*d-
+sh-3.00$ exit
+exit
+
+script done on Thu Mar 31 16:24:01 2016
